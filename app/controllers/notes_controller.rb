@@ -6,7 +6,7 @@ class NotesController < ActionController::Base
   end
 
   def create
-    @note = Note.new(params)
+    @note = Note.new(params.require(:note).permit(:title, :body))
     @note.save
     render json: @note
   end
@@ -25,12 +25,6 @@ class NotesController < ActionController::Base
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
-  end
-
-  private
-
-  def params
-    params.require(:note).permit(:title, :body)
   end
 
 end
