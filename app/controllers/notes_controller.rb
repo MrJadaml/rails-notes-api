@@ -1,9 +1,9 @@
 class NotesController < ActionController::Base
 
   def index
-    if params[:q]
-      some_variable = params[:q]
-      @notes = Note.where("title like ? OR body like ?", "%#{ some_variable }%", "%#{ some_variable }%")
+    if params[:query]
+      query = params[:query]
+      @notes = Note.where("title like ? OR body like ?", "%#{ query }%", "%#{ query }%")
     else
       @notes = Note.all
     end
